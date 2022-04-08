@@ -1,0 +1,41 @@
+{
+  "name": "partify",
+  "version": "1.0.0",
+  "description": "A Discord project that lets you party with other users using Spotify!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simonknowsstuff/partify.git"
+  },
+  "keywords": [
+    "spotify",
+    "discord",
+    "party"
+  ],
+  "author": "simonknowsstuff, HttpError",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/simonknowsstuff/partify/issues"
+  },
+  "homepage": "https://github.com/simonknowsstuff/partify#readme",
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "firebase": "^8.10.0",
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.14.1",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
+    "scrape-youtube": "^2.1.14",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.12.0"
+  },
+  "type": "module"
+}
