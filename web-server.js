@@ -20,32 +20,41 @@ export class WebServer {
     const WEB_DIR = __dirname + "/assets/web"
     const { Server } = require("socket.io");
     
+    let listeners_data = [];
+
+    async function alter_listeners(spot_arr) {
+      for (let spot_obj of spot_arr) {
+        if (spot_obj) {
+          let query = spot_obj.song_name + " - " + spot_obj.song_artist
+          let yt_search = await youtube.search(query, {type: 'video'});
+          spot_obj.youtube_link = yt_search.videos[0].link;
+        }
+      }
+      return spot_arr;
+    }
 
     // socket.io
     const io = new Server(server);
 
+    app.use('/public', express.static('public'));
     app.get('/', (req, res) => {
       res.sendFile(WEB_DIR + '/index.html');
     });
 
     server.listen(this.port, () => {
-      console.log('listening on *:3000');
+      console.log('server started on port 3000');
     });
 
     io.on("connection", (socket) => {
-      socket.on("bot_presence_data", (spot_arr) => {
+      if (listeners_data.length > 0) {
+        io.emit("listeners_data_emit", listeners_data);
+      }
+
+      socket.on("bot_presence_data", async (spot_arr) => {
         if (spot_arr) {
-          spot_arr.forEach(spot_obj => {
-            if (spot_obj.song_name) {
-              let query = spot_obj.song_name + " - " + spot_obj.song_artist
-              youtube.search(query, {type: 'video'}).then((results) => {
-                spot_obj.youtube_link = results.videos[0].link
-                console.log(spot_obj.username + " is listening to " + spot_obj.youtube_link);
-              });
-            }
-          });
+          listeners_data = await alter_listeners(spot_arr);
+          io.emit("listeners_data_emit", listeners_data);
         }
-        return;
       });
     });
   }

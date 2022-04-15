@@ -6,19 +6,22 @@ import { io } from 'socket.io-client';
 const socket = io("ws://localhost:3000");
 
 function grab_spotify_activity(presence) {
-    let activity_obj = { // Custom Spotify Object.
+    let activity_obj = { // Model object being sent.
         "username": "",
+        "avatar_url": "",
         "discriminator": "",
         "user_id": "",
         "song_name": "",
         "song_artist": "",
-        "session_id": ""
+        "session_id": "",
+        "youtube_link": ""
     };
     if (presence != null) {
         if (presence.activities != []) {
             let spot_activity = presence.activities.find(currentValue => currentValue.name == "Spotify");
             if (spot_activity != undefined) {
                 activity_obj.username = presence.user.username;
+                activity_obj.avatar_url = presence.user.avatarURL();
                 activity_obj.discriminator = presence.user.discriminator;
                 activity_obj.user_id = presence.user.id;
                 activity_obj.song_name = spot_activity.details;
@@ -39,6 +42,7 @@ export class DiscordBot {
     async run() {
         const { Client, Intents } = require('discord.js');
         const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
+        
         let current_listeners = [];
 
         client.on('ready', async () => {
@@ -52,6 +56,7 @@ export class DiscordBot {
                     current_listeners.push(spotify_activity);
                 }
             });
+
             socket.emit("bot_presence_data", current_listeners);
         });
         
@@ -83,10 +88,10 @@ export class DiscordBot {
             socket.emit("bot_presence_data", current_listeners);
             return;
         });
-
+        // Initialise Bot
         client.login(this.token);
     }
 }
 
-// Initialise Bot
+
 
