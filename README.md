@@ -1,7 +1,7 @@
 # Partify
 ![Partify Logo](./public/images/logo.svg)
 
-Partify is a nodejs app used for listening songs others are listening to!
+Partify is a [Node.js](https://nodejs.org/en/) app used for listening songs others are listening to!
 
 Partify uses [discord.js](https://discord.js.org/) and [Express](http://expressjs.com/) to run a discord bot to check the rich presence status of users in a given server and report their status to a local webserver which displays the songs each users are listening to. The songs are played through a YouTube embed with the help of the [scrape-youtube](https://www.npmjs.com/package/scrape-youtube) library.
 
