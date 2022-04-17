@@ -1,9 +1,7 @@
 // Import require
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
-
 import { io } from 'socket.io-client';
-const socket = io("ws://localhost:3000");
 
 function grab_spotify_activity(presence) {
     let activity_obj = { // Model object being sent.
@@ -11,9 +9,9 @@ function grab_spotify_activity(presence) {
         "avatar_url": "",
         "discriminator": "",
         "user_id": "",
+        "banner": "",
         "song_name": "",
         "song_artist": "",
-        "session_id": "",
         "youtube_link": ""
     };
     if (presence != null) {
@@ -24,9 +22,9 @@ function grab_spotify_activity(presence) {
                 activity_obj.avatar_url = presence.user.avatarURL();
                 activity_obj.discriminator = presence.user.discriminator;
                 activity_obj.user_id = presence.user.id;
+                activity_obj.banner = presence.user.banner;
                 activity_obj.song_name = spot_activity.details;
                 activity_obj.song_artist = spot_activity.state;
-                activity_obj.session_id = spot_activity.sessionId;
             };
         }
     }
@@ -34,12 +32,15 @@ function grab_spotify_activity(presence) {
 }
 
 export class DiscordBot {
-    constructor(token, server_id) {
-        this.token = token
-        this.server_id = server_id
+    constructor(token, server_id, server_hostname, server_port) {
+        this.token = token;
+        this.server_id = server_id;
+        this.server_hostname = server_hostname;
+        this.server_port = server_port;
     }
 
     async run() {
+        const socket = io("ws://" + this.server_hostname +":" + this.server_port);
         const { Client, Intents } = require('discord.js');
         const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
         

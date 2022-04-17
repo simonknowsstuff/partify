@@ -6,14 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="/public/index-style.css">
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
     <title>Partify</title>
 </head>
 <body>
     <main>
-        <h1>Partify.</h1>
-        <div id="list-container">
-
+        <div id="heading">
+            <img src="/public/images/logo.svg" alt="Partify Logo" width="128px" height="128px">
+            <div class="small_box">
+                <h1>Partify.</h1>
+                <p>Join the Partify <a href="https://discord.gg/bNyqv69y6b" target="_blank">Discord</a> to host!</p>
+            </div>
+        </div>        
+        <div id="youtube-container">
+            <h2>Your song will be autoplayed here!</h2>
+            <h5 id="listening_to"></h5>
+            <h6>Disclaimer: Not all songs can be perfectly converted to youtube links.</h6>
         </div>
+        <h2>Click on a user's avatar to play the song they're vibing to!</h2>
+        <div id="list-container">
+        </div>
+        <div id="none_listeners">
+            <h3>Well, this is awkward.</h3>
+            <h4>Looks like no one is playing any songs on Spotify. Come back later when someone does.</h4>
+        </div>
+        <footer>
+            <h6>Made by <a href="https://github.com/simonknowsstuff" target="_blank">simonknowsstuff</a>; Special credits to HttpError, Chris, and Technohacker &lt;3</h6>
+        </footer>
     </main>
 </body>
 <script src="/public/index-script.js"></script>
