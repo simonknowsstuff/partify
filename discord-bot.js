@@ -40,7 +40,7 @@ export class DiscordBot {
     }
 
     async run() {
-        const socket = io("ws://" + this.server_hostname +":" + this.server_port);
+        const socket = io("ws://localhost:" + this.server_port);
         const { Client, Intents } = require('discord.js');
         const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
         

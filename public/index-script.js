@@ -113,11 +113,10 @@ function create_youtube_iframe(url) {
 
 function update_youtube_iframe(url) {
     let youtube_player = document.getElementById('youtube-player');
-    let youtube_container = document.getElementById('youtube-container');
-    if (youtube_player) {
-        youtube_container.removeChild(youtube_player);
+    if (!youtube_player) {
+        create_youtube_iframe(url);
     }
-    create_youtube_iframe(url);
+    youtube_player.setAttribute('src', 'https://youtube.com/embed/' + youtube_parser(url) + '?autoplay=1&showinfo=0&controls=1');
     return;
 }
 

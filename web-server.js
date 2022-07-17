@@ -42,7 +42,7 @@ export class WebServer {
     });
 
     server.listen(this.port, () => {
-      console.log('server started on port 3000');
+      console.log('server started on port ' + this.port);
     });
 
     io.on("connection", (socket) => {
