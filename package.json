@@ -29,7 +29,7 @@
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
     "scrape-youtube": "^2.1.14",
-    "socket.io": "^4.4.1",
+    "socket.io": "^4.6.2",
     "socket.io-client": "^4.4.1"
   },
   "devDependencies": {
